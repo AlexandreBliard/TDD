@@ -34,5 +34,14 @@ class DonationFeeTest extends TestCase
             'argent projet fail');
     }
 
+    public function testPercentageCommissionSite() {
+        /*doit vérifier que pourcentage commission
+        est compris entre 0 et 30*/
+        $percentageCommission = mt_rand(0, 30);
+        $this->assertGreaterThanOrEqual(0,
+            $percentageCommission, '+gd fail');
+        $this->assertLessThanOrEqual(30,
+        $percentageCommission, '-pt fail');
+    }
 
 }
