@@ -44,4 +44,9 @@ class DonationFeeTest extends TestCase
         $percentageCommission, '-pt fail');
     }
 
+    public function testIntegarDonations() {
+        /*ce test doit vérifier que la
+        donations est supérieur ou égale à 100*/
+    }
+
 }
