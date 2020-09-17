@@ -2,19 +2,23 @@
 
 namespace Tests\Unit;
 
+use phpDocumentor\Reflection\Types\Boolean;
 use PHPUnit\Framework\TestCase;
 
 class DonationFeeTest extends TestCase
 {
+    /**
+     * @dataProvider getCommissionProvider
+     *
+     * @param int $donations
+     * @param int $commissionPercentage
+     * @param int $commissionAmount
+     */
 
-    public function testGetCommissionAmount() {
-        //cette fonction doit vérifier le montant de la comission de 10%
-        //donc si actual = montant / commission de 10%
-        $donation = 200;
-        $commissionPercentage = 10;
-        $this->assertSame(20, $donation/$commissionPercentage,
-            '%site');
-        return $donation/$commissionPercentage;
+    public function testGetCommissionAmount (int $donations, int $commissionPercentage,
+                                             int $commissionAmount) {
+        $this->assertGreaterThanOrEqual(100, $donations);
+        $this->assertEquals($commissionAmount, $donations/$commissionPercentage);
     }
 
     /**
@@ -52,6 +56,20 @@ class DonationFeeTest extends TestCase
         $limite = 100;
         $this->assertGreaterThanOrEqual($limite,
         $donations, '+GT fail');
+    }
+
+    public function getCommissionProvider() {
+        /*doit retourner des valeurs de tests
+        $donations - $commissionPercentage - $commissionAmount
+        - $projectAmount - expected - */
+        return array(
+            array(200, 10, 20),
+            array(99, 10, 20),//$donations <100
+            array(200, -5, 20),//$commissionPercentage <0
+            array(200, 30, 20),//$commissionPercentage >30
+            array(200, 10, 25),//$commissionAmount result false
+            array(200, 10, 20)//
+        );
     }
 
 }

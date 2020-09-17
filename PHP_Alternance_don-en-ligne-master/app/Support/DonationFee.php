@@ -8,6 +8,7 @@ class DonationFee
 
     private $donation;
     private $commissionPercentage;
+    private const FIXEDFEE = 50;
 
     public function __construct(int $donation, int $commissionPercentage)
     {
@@ -17,7 +18,7 @@ class DonationFee
 
     public function getCommissionAmount(int $donation, int $commissionPercentage)
     {
-        return $donation/$commissionPercentage;
+        return $donation/$commissionPercentage + self::FIXEDFEE;
     }
 
     public function getAmountCollected(int $donation, int $commissionPercentage) {
@@ -37,4 +38,5 @@ class DonationFee
             throw new \Exception("donations fail");
         }
     }
+
 }
