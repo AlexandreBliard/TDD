@@ -30,4 +30,11 @@ class DonationFee
             throw new \Exception("commission fail");
         }
     }
+
+    public function exceptionIntegarDonations($donations) {
+        $limit = 100;
+        if ($limit < $donations) {
+            throw new \Exception("donations fail");
+        }
+    }
 }
