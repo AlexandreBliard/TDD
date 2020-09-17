@@ -38,15 +38,20 @@ class DonationFeeTest extends TestCase
         /*doit vérifier que pourcentage commission
         est compris entre 0 et 30*/
         $percentageCommission = mt_rand(0, 30);
+        //$percentageCommission = 45;
         $this->assertGreaterThanOrEqual(0,
-            $percentageCommission, '+gd fail');
+            $percentageCommission, 'GT fail');
         $this->assertLessThanOrEqual(30,
-        $percentageCommission, '-pt fail');
+        $percentageCommission, 'LT fail');
     }
 
     public function testIntegarDonations() {
         /*ce test doit vérifier que la
         donations est supérieur ou égale à 100*/
+        $donations = 400;
+        $limite = 100;
+        $this->assertGreaterThanOrEqual($limite,
+        $donations, '+GT fail');
     }
 
 }
