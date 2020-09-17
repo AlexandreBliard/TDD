@@ -25,7 +25,9 @@ class DonationFee
             $this->getCommissionAmount($donation, $commissionPercentage);
     }
 
-    public function exceptionPercentageCommission() {
-
+    public function exceptionPercentageCommission($donation) {
+        if($donation >= 0 && $donation <= 30) {
+            throw new \Exception("commission fail");
+        }
     }
 }
