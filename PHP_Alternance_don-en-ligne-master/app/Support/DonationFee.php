@@ -15,8 +15,10 @@ class DonationFee
         $this->commissionPercentage = $commissionPercentage;
     }
 
-    public function getCommissionAmount()
+    public function getCommissionAmount(int $donation, int $commissionPercentage)
     {
-        return 10;
+        return $donation/$commissionPercentage;
     }
+
+
 }
