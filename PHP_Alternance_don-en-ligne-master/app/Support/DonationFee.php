@@ -25,4 +25,7 @@ class DonationFee
             $this->getCommissionAmount($donation, $commissionPercentage);
     }
 
+    public function exceptionPercentageCommission() {
+
+    }
 }
