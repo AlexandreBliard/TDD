@@ -11,30 +11,38 @@ class DonationFee
 
     public function __construct(int $donation, int $commissionPercentage)
     {
-        $this->donation = $donation;
+        if ($commissionPercentage < 0 || $commissionPercentage > 30) {
+            throw new \Exception("commission fail");
+        }
+        if ($donation < 100) {
+            throw new \Exception("donations fail");
+        }
         $this->commissionPercentage = $commissionPercentage;
+        $this->donation = $donation;
     }
 
-    public function getCommissionAmount(int $donation, int $commissionPercentage)
+    public function getCommissionAmount()
     {
-        return $donation/$commissionPercentage;
+        return $this->donation/$this->commissionPercentage;
     }
 
-    public function getAmountCollected(int $donation, int $commissionPercentage) {
-        return $donation -
-            $this->getCommissionAmount($donation, $commissionPercentage);
+    public function getAmountCollected() {
+        return $this->donation - $this->getCommissionAmount();
     }
 
-    public function exceptionPercentageCommission($donation) {
-        if($donation >= 0 && $donation <= 30) {
+    public function exceptionPercentageCommission($commissionPercentage) {
+        if($commissionPercentage >= 0 && $commissionPercentage <= 30) {
             throw new \Exception("commission fail");
         }
     }
 
     public function exceptionIntegarDonations($donations) {
-        $limit = 100;
-        if ($limit < $donations) {
-            throw new \Exception("donations fail");
-        }
+
     }
 }
+
+/*public function testExceptionDonationIsNull()
+    {
+        $this->expectException('Exception');
+        $donationFees = new \App\Support\DonationFee(0,10);
+    }*/

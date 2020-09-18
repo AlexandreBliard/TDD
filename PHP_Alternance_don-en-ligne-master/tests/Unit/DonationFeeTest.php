@@ -2,6 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Support\DonationFee;
+use http\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class DonationFeeTest extends TestCase
@@ -10,48 +12,32 @@ class DonationFeeTest extends TestCase
     public function testGetCommissionAmount() {
         //cette fonction doit vérifier le montant de la comission de 10%
         //donc si actual = montant / commission de 10%
-        $donation = 200;
-        $commissionPercentage = 10;
-        $this->assertSame(20, $donation/$commissionPercentage,
-            '%site');
-        return $donation/$commissionPercentage;
+        $DonationFee = new DonationFee(200, 10);
+        $this->assertSame(20,
+            $DonationFee->getCommissionAmount() );
     }
 
-    /**
-     * @depends testGetCommissionAmount
-     * @param $sitePercentage
-     *
-     */
-    public function testGetAmountCollected($sitePercentage) {
+    public function testGetAmountCollected() {
         /*cette fonction doit soustraire la donation au
         résultat de testGetCommissionAmount()
         actual = donation - testGetCommissionAmount()
         */
-        $donations = 200;
-        $this->assertSame(20, $sitePercentage, 'sitePercentage fail');
+        $DonationFee = new DonationFee(200, 10);
         $this->assertSame(180,
-            $donations - $sitePercentage,
-            'argent projet fail');
+            $DonationFee->getAmountCollected());
     }
 
-    public function testPercentageCommissionSite() {
-        /*doit vérifier que pourcentage commission
-        est compris entre 0 et 30*/
-        $percentageCommission = mt_rand(0, 30);
-        //$percentageCommission = 45;
-        $this->assertGreaterThanOrEqual(0,
-            $percentageCommission, 'GT fail');
-        $this->assertLessThanOrEqual(30,
-        $percentageCommission, 'LT fail');
+    public function testExceptionDonationIsNull() {
+        $this->expectException('Exception');
+        $this->expectExceptionMessage('donations fail');
+        $donationFees = new \App\Support\DonationFee(0,10);
     }
 
-    public function testIntegarDonations() {
-        /*ce test doit vérifier que la
-        donations est supérieur ou égale à 100*/
-        $donations = 400;
-        $limite = 100;
-        $this->assertGreaterThanOrEqual($limite,
-        $donations, '+GT fail');
+    public function testExceptionCommissionIsMoreThan30() {
+        $this->expectException('Exception');
+        $this->expectExceptionMessage('commission fail');
+        $donationFees = new \App\Support\DonationFee(200,31);
     }
+
 
 }
