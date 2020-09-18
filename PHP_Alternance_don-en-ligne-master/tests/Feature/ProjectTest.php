@@ -15,4 +15,13 @@ class ProjectTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function testTagH1() {
+        $response = $this->get('/project');
+        $value = '<h1>Liste des projets</h1>';
+        $response
+            ->assertSee($value, false);
+    }
+
+
 }
