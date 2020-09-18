@@ -39,9 +39,9 @@ class DonationFee
         }
     }
 
-    public function getSummary() {
+    public function getSummary() {//envoie un tableau associatif avec toutes les valeurs
         return
-            $summary[] = [
+            [
                 'donations' => $this->donation,
                 'fixedFee' => self::FIXEDFEE,
                 'commission' => $this->getCommissionAmount(),

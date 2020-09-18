@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Support\DonationFee;
-use http\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class DonationFeeTest extends TestCase
@@ -67,19 +66,20 @@ class DonationFeeTest extends TestCase
         on vérifie que ces données sont remplis
         car les résultats on été vérifiés avant*/
         $DonationFee = new DonationFee(200, 10);
+        $summary = $DonationFee->getSummary();
         //test si c'est un tableau
-        $this->assertIsArray($DonationFee->getSummary());
+        $this->assertIsArray($summary);
         //test si les clés sont là
         $this->assertArrayHasKey('donations',
-            $DonationFee->getSummary());
+            $summary);
         $this->assertArrayHasKey('fixedFee',
-            $DonationFee->getSummary());
+            $summary);
         $this->assertArrayHasKey('commission',
-            $DonationFee->getSummary());
+            $summary);
         $this->assertArrayHasKey('fixedAndCommission',
-            $DonationFee->getSummary());
+            $summary);
         $this->assertArrayHasKey('amountCollected',
-            $DonationFee->getSummary());
+            $summary);
 
     }
 }
