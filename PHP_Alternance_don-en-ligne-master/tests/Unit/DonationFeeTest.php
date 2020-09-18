@@ -46,4 +46,10 @@ class DonationFeeTest extends TestCase
             $DonationFee->getFixedAndCommissionFeeAmount());
     }
 
+    public function testExceptionGetFixedAndCommissionFeeAmount() {
+        $this->expectException('Exception');
+        $this->expectExceptionMessage('too more money');
+        $DonationFee = new DonationFee(500000, 10);
+    }
+
 }
