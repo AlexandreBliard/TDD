@@ -31,15 +31,26 @@ class DonationFee
         return $this->donation - $this->getCommissionAmount();
     }
 
-    public function exceptionPercentageCommission($commissionPercentage) {
-        if($commissionPercentage >= 0 && $commissionPercentage <= 30) {
-            throw new \Exception("commission fail");
+    public function getFixedAndCommissionFeeAmount() {
+        if ($this->getCommissionAmount() + self::FIXEDFEE > 500) {
+            return 500;
+        }else{
+            return $this->getCommissionAmount() + self::FIXEDFEE;
         }
     }
 
-    public function getFixedAndCommissionFeeAmount() {
-        return $this->getCommissionAmount() + self::FIXEDFEE;
+    public function getSummary() {
+        return
+            $summary[] = [
+                'donations' => $this->donation,
+                'fixedFee' => self::FIXEDFEE,
+                'commission' => $this->getCommissionAmount(),
+                'fixedAndCommission' =>$this->getFixedAndCommissionFeeAmount(),
+                'amountCollected' =>$this->getAmountCollected()
+            ]
+        ;
     }
+
 }
 
 /*public function testExceptionDonationIsNull()

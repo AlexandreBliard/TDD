@@ -18,7 +18,7 @@ class DonationFeeTest extends TestCase
     }
 
     public function testGetAmountCollected() {
-        /*cette fonction doit soustraire la donation au
+        /*ce test doit soustraire la donation au
         résultat de testGetCommissionAmount()
         actual = donation - testGetCommissionAmount()
         */
@@ -27,10 +27,13 @@ class DonationFeeTest extends TestCase
             $DonationFee->getAmountCollected());
     }
 
-    public function testExceptionDonationIsNull() {
+    public function testExceptionDonationIsUnder100() {
+        /*ce test vérifie si l'exception est levé ou non,
+        dans ce cas on vérifie que le montant
+        n'est pas inférieur à 99 */
         $this->expectException('Exception');
         $this->expectExceptionMessage('donations fail');
-        $donationFees = new \App\Support\DonationFee(0,10);
+        $donationFees = new \App\Support\DonationFee(99,10);
     }
 
     public function testExceptionCommissionIsMoreThan30() {
@@ -40,16 +43,43 @@ class DonationFeeTest extends TestCase
     }
 
     public function testGetFixedAndCommissionFeeAmount() {
+        /*on contrôle le fais que les 0,50€ obligatoires se rajoutent
+        sur les frais de commissions du site*/
         $DonationFee = new DonationFee(200, 10);
-        $fixedFee = 50 ;
-        $this->assertSame(70,
+        $fraisFixe = 50;
+        $expected = (200 / 10) + $fraisFixe;
+        $this->assertSame($expected,
             $DonationFee->getFixedAndCommissionFeeAmount());
     }
 
-    public function testExceptionGetFixedAndCommissionFeeAmount() {
-        $this->expectException('Exception');
-        $this->expectExceptionMessage('too more money');
+    public function testGetFixedAndCommissionFeeAmountLimit() {
+        /*on test si le résultat est supérieur à 501 dans le calcul de
+        la fonction, si c'est le cas il doit retourner obligatoirement
+        juste 500 car ce chiffre est le maximum attendu*/
         $DonationFee = new DonationFee(500000, 10);
+        $this->assertSame(500,
+        $DonationFee->getFixedAndCommissionFeeAmount());
     }
 
+    public function testGetSummary() {
+        /*on créer un tableau associatif dans
+        lequel on pousse toutes les donnes
+        on vérifie que ces données sont remplis
+        car les résultats on été vérifiés avant*/
+        $DonationFee = new DonationFee(200, 10);
+        //test si c'est un tableau
+        $this->assertIsArray($DonationFee->getSummary());
+        //test si les clés sont là
+        $this->assertArrayHasKey('donations',
+            $DonationFee->getSummary());
+        $this->assertArrayHasKey('fixedFee',
+            $DonationFee->getSummary());
+        $this->assertArrayHasKey('commission',
+            $DonationFee->getSummary());
+        $this->assertArrayHasKey('fixedAndCommission',
+            $DonationFee->getSummary());
+        $this->assertArrayHasKey('amountCollected',
+            $DonationFee->getSummary());
+
+    }
 }
