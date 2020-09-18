@@ -8,6 +8,7 @@ class DonationFee
 
     private $donation;
     private $commissionPercentage;
+    const FIXEDFEE = 50;
 
     public function __construct(int $donation, int $commissionPercentage)
     {
@@ -36,8 +37,8 @@ class DonationFee
         }
     }
 
-    public function exceptionIntegarDonations($donations) {
-
+    public function getFixedAndCommissionFeeAmount() {
+        return $this->getCommissionAmount() + self::FIXEDFEE;
     }
 }
 

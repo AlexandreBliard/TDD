@@ -39,5 +39,11 @@ class DonationFeeTest extends TestCase
         $donationFees = new \App\Support\DonationFee(200,31);
     }
 
+    public function testGetFixedAndCommissionFeeAmount() {
+        $DonationFee = new DonationFee(200, 10);
+        $fixedFee = 50 ;
+        $this->assertSame(70,
+            $DonationFee->getFixedAndCommissionFeeAmount());
+    }
 
 }
