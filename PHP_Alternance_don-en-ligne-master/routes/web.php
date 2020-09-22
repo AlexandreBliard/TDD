@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* vers la liste des projets*/
 Route::get('/project', [\App\Http\Controllers\ProjectController::class, 'showProjectList'])
 ->name('project');
-//Route::get('/projects', [ProjectController::class, 'index'])->name('projects')
+
+/*vers le détail d'un projet*/
+Route::get('/project/{id}', [\App\Http\Controllers\ProjectController::class, 'showOneProject'])
+    ->name('oneProject');

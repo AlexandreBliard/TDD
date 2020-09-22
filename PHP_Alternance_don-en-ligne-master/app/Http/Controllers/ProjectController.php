@@ -11,4 +11,9 @@ class ProjectController extends Controller
         $allProjects = Project::all();
         return view('project')->with('allProjects', $allProjects);
     }
+
+    public function showOneProject($id) {
+        $oneProject = Project::find($id);
+        return view('oneProject')->with('oneProject', $oneProject);
+    }
 }

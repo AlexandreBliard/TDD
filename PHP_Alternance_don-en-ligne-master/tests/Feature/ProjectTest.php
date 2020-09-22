@@ -43,6 +43,14 @@ class ProjectTest extends TestCase
     public function testWhoConfirmTitleInProjectDetail() {
         //Livrable : TEST validant la présence du titre d'un projet
         // sur la page de détail du projet
-        //Given : généré des données avec une factory
+        //Given : généré des données avec une factory dnas la BDD
+        $data = Project::factory()
+            ->create();
+        //dd($data->id);renvois 1
+        //When : quand on appelle la page /project/{id}
+        $response = $this->get('/project/{id}');
+        dd($response);
+        //Then : je dois trouver le même titre dans la page détail
+        // que le nom de projet
     }
 }
