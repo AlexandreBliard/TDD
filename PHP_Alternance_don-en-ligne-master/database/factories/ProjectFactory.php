@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ModelFactory extends Factory
+class ProjectFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Model::class;
+    protected $model = Project::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +23,11 @@ class ModelFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'description' => $this->faker->text,
+            'created_at' => $this->faker->dateTime,
+            'author_name' => $this->faker->name
+
         ];
     }
 }

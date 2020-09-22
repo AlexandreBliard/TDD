@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/project', function () {
-    return view('project');
-});
+Route::get('/project', [\App\Http\Controllers\ProjectController::class, 'showProjectList'])
+->name('project');
+//Route::get('/projects', [ProjectController::class, 'index'])->name('projects')
