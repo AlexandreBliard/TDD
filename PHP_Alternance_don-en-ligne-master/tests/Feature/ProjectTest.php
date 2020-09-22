@@ -23,4 +23,16 @@ class ProjectTest extends TestCase
         $response
             ->assertSee($value, false);
     }
+
+    public function testWhoConfirmTitleProjectIsTheSameAsDB() {
+        //Livrable : TEST validant la présence du titre d'un projet
+        //sur la page liste des objets
+        //Given : généré des données avec une factory dans la BDD
+
+        //When : quand j'appelle la page /project
+
+        //Then : alors je confirme le contenu du titre
+        // dans la page
+
+    }
 }
