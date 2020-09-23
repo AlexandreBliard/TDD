@@ -55,6 +55,10 @@
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                                         {{ $oneProject->description }}
                                     </div>
+                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                                        projet fait par : {{ $oneProject->author_name }}
+                                        , édité le : {{ $oneProject->created_at }}
+                                    </div>
                                 </div>
                             </div>
 
