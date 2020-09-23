@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use App\Models\User;
 use Http;
 use \Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -57,5 +58,17 @@ class ProjectTest extends TestCase
         $response->assertSee($data->name, false);
     }
 
+    public function testWhoValidateRelationShipBetweenProjectAndUser() {
+        //Livrable : TEST unitaire validant la relation entre
+        // les models Project et User/
+        //Given : il me faut deux BDD
+        $data = User::factory()
+            ->has(Project::factory()->count(2))
+            ->create();
+        dd($data);
+        //When : quand je requiert une donnée en passant par
+        //Produit puis User/
 
+        //Then : les deux Model sont liés/
+    }
 }
