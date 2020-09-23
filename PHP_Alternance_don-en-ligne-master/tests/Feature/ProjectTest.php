@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use Http;
 use \Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
@@ -46,15 +47,15 @@ class ProjectTest extends TestCase
         //Given : généré des données avec une factory dans la BDD
         $data = Project::factory()
             ->create();
-        //dd($data->id);//renvois 1
+        $id =$data->id;
+
         //When : quand on appelle la page /project/{id}
-        $response = $this->get('/project' );//il faut que ici on puisse lui mettre dynamiquement l'id
-        // /project/{id} NOPE
-        // /project/'$data->id NOPE
-        // project')->with(data->id); NOPE
-        // /
-        dd($response);
+        $response = $this->get("/project/${id}");//il faut que ici on puisse lui passer les données
+
         //Then : je dois trouver le même titre dans la page détail
         // que le nom de la BDD
+        $response->assertSee($data->name, false);
     }
+
+
 }
