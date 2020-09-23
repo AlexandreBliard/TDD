@@ -58,17 +58,29 @@ class ProjectTest extends TestCase
         $response->assertSee($data->name, false);
     }
 
-    public function testWhoValidateRelationShipBetweenProjectAndUser() {
-        //Livrable : TEST unitaire validant la relation entre
-        // les models Project et User/
-        //Given : il me faut deux BDD
-        $data = User::factory()
+    public function testWhoValidateIfAuthorNameIsPresentInThePage() {
+        //Livrable : Test validant la présence du nom de l'auteur
+        //d'un projet sur la page de détails d'un projet/
+        //Given : remplir la BDD Product /
+        $project = Project::factory()
+            ->create();
+        $id =$project->id;
+        //When : charger la page oneProject
+        $response = $this->get("/project/${id}");
+        //Then : comparer les deux résultats
+        $response->assertSee($project->author_name, false);
+    }
+
+    public function testWhoValidateNameUserAuthorOfThisProject() {
+        //Livrable : Test validant la présence du nom de l'auteur
+        //d'un projet sur la page de détails d'un projet/
+        //Given : remplir la BDD Product et User/
+        $user = User::factory()
             ->has(Project::factory()->count(2))
             ->create();
-        dd($data);
-        //When : quand je requiert une donnée en passant par
-        //Produit puis User/
-
-        //Then : les deux Model sont liés/
+        $id = $user->Projects[0]->id;
+        //When : charger la page oneProject
+        $response = $this->get("/project/${id}");
+        $response->assertSee($user->Projects[0]->author_name);
     }
 }
