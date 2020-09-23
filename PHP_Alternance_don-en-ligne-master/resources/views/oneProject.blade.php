@@ -116,6 +116,7 @@
                         <button type="button" class="btn btn-secondary">
                             Déposez un projet
                         </button>
+                    </div>
             </div>
         </body>
     </html>
