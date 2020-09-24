@@ -26,7 +26,12 @@
             <h1>Liste des projets</h1>
         </div>
         <div>
-            {{ $user->name }}
+            @if (Auth::check())
+                {{ $user->name }}
+            @endif
+        </div>
+        <div>
+            <a href=" {{ route('addProject') }}" class="underline text-gray-900 dark:text-grey">ajouter un projet</a>
         </div>
 
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">

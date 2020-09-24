@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Liste des Projets</title>
+        <title>ajoutez votre projet</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,80 +23,49 @@
 
     <body class="antialiased">
         <div class="text-center">
-            <h1>Liste des projets</h1>
+            <h1>Ajoutez votre projet</h1>
         </div>
         <div>
-            {{ $user->name }}
+            ici le nom de la personne connecté (in progress)
         </div>
 
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                        @endif
-                    @endif
-                </div>
-            @endif
-
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-
-
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
-
-                        @foreach($allProjects as $oneProject)
-                            <div class="p-6">
-                                <div class="flex items-center">
-                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-500"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                                    <div class="ml-4 text-lg leading-7 font-semibold">
-                                        <a href="{{ route('oneProject', $oneProject->id) }}" class="underline text-gray-900 dark:text-white">en savoir plus</a>
-                                    </div>
-                                    <br>
-                                    <div class="text-center text-gray-900 dark:text-white">
-                                        <h3>{{ $oneProject->name }}</h3>
-                                    </div>
-
-                                    </div>
-
-                                <div class="ml-12">
-                                    <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                        {{ $oneProject->description }}
-                                    </div>
+                        <form class="form-group" action="" method="post">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <div class="text-center text-white">
+                                    le "front" c'est ma grande passion
                                 </div>
+                                <label for="nameProduct">nom du projet</label>
+                                <input type="text" class="form-control"
+                                       name="nameProject" placeholder="nom du projet">
+                                <br>
+
+                                <label for="description">description</label>
+                                <input type="text" class="form-control" name="description"
+                                       placeholder="description">
+                                <br>
+
+                                <label for="created_at">date de création</label>
+                                <input type="number" class="form-control" name="created_at"
+                                       placeholder="date de création">
+                                <br>
+
+                                <label for="author_name">votre nom</label>
+                                <input type="number" class="form-control"
+                                       name="author_name"
+                                       placeholder="votre nom">
+                                <br>
+
                             </div>
-                        @endforeach
-                    </div>
-                </div>
+                            <br>
 
-                <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
-                        <div class="flex items-center">
-                            <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="-mt-px w-5 h-5 text-gray-400">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
+                            <button type="submit" class="btn btn-primary">lancer le projet</button>
+                        </form>
 
-                            <a href="https://laravel.bigcartel.com" class="ml-1 underline">
-                                Shop
-                            </a>
-
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="ml-4 -mt-px w-5 h-5 text-gray-400">
-                                <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
-
-                            <a href="https://github.com/sponsors/taylorotwell" class="ml-1 underline">
-                                Sponsor
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Build v{{ Illuminate\Foundation\Application::VERSION }}
                     </div>
                 </div>
             </div>

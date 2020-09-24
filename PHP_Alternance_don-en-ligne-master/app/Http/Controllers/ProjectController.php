@@ -19,4 +19,14 @@ class ProjectController extends Controller
         $oneProject = Project::find($id);
         return view('oneProject')->with('oneProject', $oneProject);
     }
+
+    public function addProject() {
+
+        if (\Auth::check()) {
+            return view('addProject');
+        }else {
+            return view('project');
+        }
+
+    }
 }
