@@ -21,12 +21,6 @@ class ProjectController extends Controller
     }
 
     public function addProject() {
-
-        if (\Auth::check()) {
-            return view('addProject');
-        }else {
-            return view('project');
-        }
-
+        return view('addProject');
     }
 }
