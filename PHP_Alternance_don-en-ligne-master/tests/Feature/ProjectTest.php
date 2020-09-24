@@ -99,4 +99,22 @@ class ProjectTest extends TestCase
         // Then : tester qu'on voit le nom de l'utilisateur dans la page'/
         $response->assertSee($user->name);
     }
+
+    public function testWhoVerifyIDUserAndIDUserProjectIsTheSamePerson() {
+        //test validant que seul l'utilisateur d'un projet
+        //peut l'éditer/
+
+        //Given : il faut un User et un Project
+        $user = User::factory()->create();
+        $project = Project::factory()->create();
+        $id = $project->id;
+
+        //When : nous désirons changer un project
+        $response = $this->actingAs($user)
+            ->get("${id}/modifyProject");
+
+        //Then : si les deux id ne sont
+        // pas les mêmes cela bloque/
+        $response->assertDontSee($project, false);
+    }
 }
