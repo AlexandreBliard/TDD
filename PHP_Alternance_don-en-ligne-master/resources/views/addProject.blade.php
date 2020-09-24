@@ -26,39 +26,50 @@
             <h1>Ajoutez votre projet</h1>
         </div>
         <div>
-            ici le nom de la personne connecté (in progress)
+            {{ $user->name }}
         </div>
 
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2">
-                        <form class="form-group" action="" method="post">
+                        <form class="form-group" action="{{ route('confirmAddProject',) }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <div class="text-center text-white">
                                     le "front" c'est ma grande passion
                                 </div>
-                                <label for="nameProduct">nom du projet</label>
+                                <label for="name">nom du projet</label>
                                 <input type="text" class="form-control"
-                                       name="nameProject" placeholder="nom du projet">
+                                       name="name"
+                                       placeholder="nom du projet">
                                 <br>
 
                                 <label for="description">description</label>
-                                <input type="text" class="form-control" name="description"
+                                <input type="text" class="form-control"
+                                       name="description"
                                        placeholder="description">
                                 <br>
 
                                 <label for="created_at">date de création</label>
-                                <input type="number" class="form-control" name="created_at"
+                                <input type="datetime-local" class="form-control"
+                                       name="created_at"
                                        placeholder="date de création">
                                 <br>
 
                                 <label for="author_name">votre nom</label>
-                                <input type="number" class="form-control"
+                                <input type="text" class="form-control"
                                        name="author_name"
                                        placeholder="votre nom">
                                 <br>
+
+                                <label for="user_id">votre id</label>
+                                <input type="number" class="form-control"
+                                        name="user_id">
+                                <br>
+
+
+
 
                             </div>
                             <br>

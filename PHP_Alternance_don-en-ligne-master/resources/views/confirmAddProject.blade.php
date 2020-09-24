@@ -4,7 +4,7 @@
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <title>{{ $oneProject->name }}</title>
+            <title>{{ $addProject->name }}</title>
 
             <!-- Fonts -->
             <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
 
         <body class="antialiased">
             <div class="text-center">
-                <h1>{{ $oneProject->name }}</h1>
+                <h1>{{ $addProject->name }}</h1>
             </div>
 
             <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
@@ -52,11 +52,11 @@
                                  </div>
                                 <div class="ml-12">
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                        {{ $oneProject->description }}
+                                        {{ $addProject->description }}
                                     </div>
                                     <div class="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                                        projet fait par : {{ $oneProject->author_name }}
-                                        , édité le : {{ $oneProject->created_at }}
+                                        projet fait par : {{ $addProject->author_name }}
+                                        , édité le : {{ $addProject->created_at }}
                                     </div>
                                 </div>
                             </div>
@@ -109,14 +109,6 @@
                         </div>
                     </div>
                 </div>
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                        <button type="button" class="btn btn-secondary">
-                            Connectez-vous
-                        </button>
-                        <button type="button" class="btn btn-secondary">
-                            Déposez un projet
-                        </button>
-                    </div>
             </div>
         </body>
     </html>

@@ -21,6 +21,22 @@ class ProjectController extends Controller
     }
 
     public function addProject() {
-        return view('addProject');
+
+        $user = \Auth::user();
+        return view('addProject')->with('user', $user);
+    }
+
+    public function confirmAddProject(Request $request) {
+
+        $addProject = new Project;
+
+        $addProject->name = $request->name;
+        $addProject->description = $request->description;
+        $addProject->created_at = $request->created_at;
+        $addProject->author_name = $request->author_name;
+        $addProject->user_id = $request->user_id;
+        $addProject->save();
+
+        return view('confirmAddProject')->with('addProject', $addProject);
     }
 }

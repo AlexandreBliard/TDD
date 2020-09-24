@@ -27,8 +27,12 @@ Route::get('/project/{id}', [\App\Http\Controllers\ProjectController::class, 'sh
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('dashboard')
+    ->middleware('auth');
 
 Route::get('/addProject', [\App\Http\Controllers\ProjectController::class, 'addProject'])
     ->name('addProject')
     ->middleware('auth');
+
+Route::post('/confirmAddProject', [\App\Http\Controllers\ProjectController::class, 'confirmAddProject'])
+    ->name('confirmAddProject');
