@@ -24,3 +24,6 @@ Route::get('/project', [\App\Http\Controllers\ProjectController::class, 'showPro
 /*vers le détail d'un projet*/
 Route::get('/project/{id}', [\App\Http\Controllers\ProjectController::class, 'showOneProject'])
     ->name('oneProject');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
