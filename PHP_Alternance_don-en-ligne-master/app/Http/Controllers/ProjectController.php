@@ -40,13 +40,18 @@ class ProjectController extends Controller
     }
 
     public function modifyProject($id) {
+        $user = \Auth::user();//ok
         $project = Project::find($id);
-        return view('modifyProject')->with('oneProject', $project);
+        if ($user->id == $project->user_id) {
+            return view('modifyProject')->with('oneProject', $project);
+        }else {
+            return view('oneProject')->with('oneProject', $project);
+        }
+
+
     }
 
     public function confirmModifyProject(Request $request, $id) {
-        //$user = \Auth::user();
-        //dd($user->Projects[0]);
         $project = Project::find($id);
         $project->name = $request->input('name');
         $project->description = $request->input('description');

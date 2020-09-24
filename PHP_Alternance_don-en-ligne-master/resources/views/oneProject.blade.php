@@ -116,7 +116,7 @@
                             </a>
                         </button>
                         <button type="button" class="btn btn-secondary">
-                            <a href="{{ url('localhost:8000/welcome') }}">
+                            <a href="{{ url('/project') }}">
                                 Retour liste
                             </a>
                         </button>
