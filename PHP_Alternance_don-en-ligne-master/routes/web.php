@@ -36,3 +36,9 @@ Route::get('/addProject', [\App\Http\Controllers\ProjectController::class, 'addP
 
 Route::post('/confirmAddProject', [\App\Http\Controllers\ProjectController::class, 'confirmAddProject'])
     ->name('confirmAddProject');
+
+Route::get('/{id}/modifyProject', [\App\Http\Controllers\ProjectController::class, 'modifyProject'])
+    ->name('modifyProject');
+
+Route::post('/{id}/confirmModifyProject', [\App\Http\Controllers\ProjectController::class, 'confirmModifyProject'])
+    ->name('confirmModifyProject');

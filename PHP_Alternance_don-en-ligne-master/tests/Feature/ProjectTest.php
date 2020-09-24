@@ -78,6 +78,7 @@ class ProjectTest extends TestCase
         $user = User::factory()
             ->has(Project::factory()->count(2))
             ->create();
+        dd($user);
         $id = $user->Projects[0]->id;
         //When : charger la page oneProject
         $response = $this->get("/project/${id}");

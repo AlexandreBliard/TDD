@@ -21,7 +21,6 @@ class ProjectController extends Controller
     }
 
     public function addProject() {
-
         $user = \Auth::user();
         return view('addProject')->with('user', $user);
     }
@@ -38,5 +37,21 @@ class ProjectController extends Controller
         $addProject->save();
 
         return view('confirmAddProject')->with('addProject', $addProject);
+    }
+
+    public function modifyProject($id) {
+        $project = Project::find($id);
+        return view('modifyProject')->with('oneProject', $project);
+    }
+
+    public function confirmModifyProject(Request $request, $id) {
+        //$user = \Auth::user();
+        //dd($user->Projects[0]);
+        $project = Project::find($id);
+        $project->name = $request->input('name');
+        $project->description = $request->input('description');
+        $project->save();//sauvegarde
+
+        return view('/oneProject')->with('oneProject', $project);
     }
 }

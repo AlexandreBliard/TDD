@@ -111,10 +111,14 @@
                 </div>
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                         <button type="button" class="btn btn-secondary">
-                            Connectez-vous
+                            <a href="{{ route('modifyProject', $oneProject->id) }}">
+                                Modifiez le projet
+                            </a>
                         </button>
                         <button type="button" class="btn btn-secondary">
-                            Déposez un projet
+                            <a href="{{ url('localhost:8000/welcome') }}">
+                                Retour liste
+                            </a>
                         </button>
                     </div>
             </div>
