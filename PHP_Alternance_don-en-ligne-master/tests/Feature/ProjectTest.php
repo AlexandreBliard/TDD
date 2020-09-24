@@ -84,5 +84,18 @@ class ProjectTest extends TestCase
         $response->assertSee($user->Projects[0]->author_name);
     }
 
+    public function testShowNameUserWhoIsConnected()
+        //afficher le nom d'une personne connecté
+    {
+        //Given : fournir un User
+        $user = User::factory()->create();
 
+        //When : en utilisant l'user, se connecter en tant que,
+        // dans la page /project/
+        $response = $this->actingAs($user)
+            ->get('/project');
+
+        // Then : tester qu'on voit le nom de l'utilisateur dans la page'/
+        $response->assertSee($user->name);
+    }
 }
