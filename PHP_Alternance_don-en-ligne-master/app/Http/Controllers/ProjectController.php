@@ -9,7 +9,10 @@ class ProjectController extends Controller
 {
     public function showProjectList() {
         $allProjects = Project::all();
-        return view('project')->with('allProjects', $allProjects);
+        $user = \Auth::user();
+        //dd($user->name);
+        return view('project')->with('allProjects', $allProjects)
+            ->with('user', $user);
     }
 
     public function showOneProject($id) {
