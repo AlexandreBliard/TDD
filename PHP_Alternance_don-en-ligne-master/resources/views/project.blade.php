@@ -25,6 +25,9 @@
         <div class="text-center">
             <h1>Liste des projets</h1>
         </div>
+        <div>
+            {{ $user->name }}
+        </div>
 
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
             @if (Route::has('login'))
