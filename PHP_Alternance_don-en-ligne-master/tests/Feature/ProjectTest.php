@@ -117,4 +117,36 @@ class ProjectTest extends TestCase
         // pas les mêmes cela bloque/
         $response->assertDontSee($project, false);
     }
+
+    public function testWhoValidateSameInfoForFormulaireAddProject() {
+        //Créez un test qui vérifiera les données
+        // du formulaire qui sera envoyé au serveur/
+
+        //Given : il faut un User et un Project avec données contraintes
+        $project = Project::factory([])->create([
+            'user_id' => '1',
+        ]);
+        $user = User::factory()->create();
+        //dump($project);
+        //dd($user);
+
+        //When : quand on appelle la page confirmAddProject/
+        $response = $this->actingAs($user)
+            ->post('/confirmAddProject',
+            [
+                'name' => $project->name,
+                'description' => $project->description,
+                'created_at' => $project->created_at,
+                'author_name' => $project->author_name,
+                'user_id' => $project->user_id,
+            ]);
+        //dd($response);
+
+        //Then : les infos saisies doivent être les mêmes.
+        $response->assertSee($project->name, false);
+        $response->assertSee($project->description, false);
+        $response->assertSee($project->created_at, false);
+        $response->assertSee($project->author_name, false);
+        $response->assertSee($project->user_id, false);
+    }
 }
