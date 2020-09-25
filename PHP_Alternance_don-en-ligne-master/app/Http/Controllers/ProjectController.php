@@ -44,9 +44,9 @@ class ProjectController extends Controller
         $project = Project::find($id);
         if ($user->id == $project->user_id) {
             return view('modifyProject')->with('oneProject', $project);
-        }else {
-            return view('oneProject')->with('oneProject', $project);
         }
+        return redirect()->back();
+
 
 
     }
