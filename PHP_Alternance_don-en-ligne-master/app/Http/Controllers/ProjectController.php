@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DonateShipped;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -29,12 +30,16 @@ class ProjectController extends Controller
 
         $addProject = new Project;
 
+
         $addProject->name = $request->name;
         $addProject->description = $request->description;
         $addProject->created_at = $request->created_at;
         $addProject->author_name = $request->author_name;
         $addProject->user_id = $request->user_id;
         $addProject->save();
+
+        \Mail::to('alexandre.bliard@laposte.net')->send(new DonateShipped($addProject));
+
 
         return view('confirmAddProject')->with('addProject', $addProject);
     }

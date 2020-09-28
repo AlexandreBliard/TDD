@@ -2,6 +2,8 @@
 
 namespace App\Mail;
 
+
+use App\Models\Project;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,14 +13,16 @@ class DonateShipped extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $project;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param Project $project
      */
-    public function __construct()
+    public function __construct(Project $project)
     {
-        //
+        $this->project = $project;
     }
 
     /**
@@ -28,7 +32,8 @@ class DonateShipped extends Mailable
      */
     public function build()
     {
-        return $this->from('alexandre.bliard@icloud.com')
-            ->view('view.name');
+        return $this->from('mail@example.com', 'Mailtrap')
+            ->subject('Mailtrap Confirmation')
+            ->view('mail.project');
     }
 }

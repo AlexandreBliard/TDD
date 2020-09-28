@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILGUN', 'smtp'),
+    'default' => env('MAIL_MAILERS', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------

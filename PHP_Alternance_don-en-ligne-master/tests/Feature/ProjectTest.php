@@ -78,7 +78,6 @@ class ProjectTest extends TestCase
         $user = User::factory()
             ->has(Project::factory()->count(2))
             ->create();
-        dd($user);
         $id = $user->Projects[0]->id;
         //When : charger la page oneProject
         $response = $this->get("/project/${id}");
@@ -148,5 +147,10 @@ class ProjectTest extends TestCase
         $response->assertSee($project->created_at, false);
         $response->assertSee($project->author_name, false);
         $response->assertSee($project->user_id, false);
+    }
+
+    public function testWhoValidateSendMail() {
+        //le créateur de projet reçoit un mail et moi
+        // l'admibistrateur je reçois aussi un mail /
     }
 }
